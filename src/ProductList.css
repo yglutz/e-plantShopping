@@ -107,6 +107,10 @@ body {
     margin-top: 10px;
 }
 
+.product-button.added-to-cart {
+    background-color: grey; /* Grey when product is added */
+}
+
 .product-button:hover {
     background-color: #c0392b;
 }
@@ -167,7 +171,7 @@ body {
 .cart_quantity_count{
     margin-top: 16px;
     /* background-color: red; */
-    margin-left: 27px;
+    margin-left: 20px;
     position: absolute;
     font-size: 29px;
 

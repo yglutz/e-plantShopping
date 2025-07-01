@@ -266,6 +266,10 @@ function ProductList({ onHomeClick }) {
 
     function handleAddToCart(plant) {
         dispatch(addItem(plant));
+        setAddedToCart((prevState) => ({
+            ...prevState,
+            [plant.name]: true, // Track if the plant has been added to the cart
+        }))
     }
 
     return (
@@ -286,11 +290,14 @@ function ProductList({ onHomeClick }) {
                 <div style={styleObjUl}>
                     <div> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
                     <div>
+
                         <a href="#"
                            onClick={(e) => handleCartClick(e)}
                            style={styleA}>
                             <h1 className='cart'>
-                                {calculateTotalQuantity()}
+                                <div className={"cart_quantity_count"}>
+                                    {calculateTotalQuantity()}
+                                </div>
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 256 256"
                                      id="IconChangeColor"
@@ -325,10 +332,11 @@ function ProductList({ onHomeClick }) {
                                         <div className={"product-description"}>{plant.description}</div>
                                         <div className={"product-cost"}>{plant.cost}</div>
                                         <button
-                                            className={"product-button"}
+                                            className={addedToCart[plant.name] ? "product-button added-to-cart" : "product-button"}
                                             onClick={() => handleAddToCart(plant)}
+                                            disabled={addedToCart[plant.name]} // Disable button if already added
                                         >
-                                            Add to Cart
+                                            {addedToCart[plant.name] ? "Added to Cart" : "Add to Cart"}
                                         </button>
                                     </div>
                                 ))}
